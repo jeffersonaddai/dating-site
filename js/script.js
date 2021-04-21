@@ -3,59 +3,58 @@ var users = [
         name: 'Lucy',
         gender: 'F',
         hobby: 'pets',
-        avatar: 'avatar1.png',
+        avatar: 'image1.jpg',
         age: 20        
     },
     {
         name: 'Betty',
         gender: 'F',
         hobby: 'pets',
-        avatar: 'avatar2.png',
+        avatar: 'image2.jpg',
         age: 25
     },
     {
         name: 'Ronald',
         gender: 'M',
         hobby: 'music',
-        avatar: 'avatar3.png',
+        avatar: 'image3.jpg',
         age: 18
     },
     {
         name: 'Christopher',
         gender: 'M',
         hobby: 'sports',
-        avatar: 'avatar4.png',
+        avatar: 'image4.jpg',
         age: 45
     },
     {
         name: 'Ximena',
         gender: 'F',
         hobby: 'reading',
-        avatar: 'avatar5.png',
+        avatar: 'image5.jpg',
         age: 42
     },
     {
         name: 'Paul',
         gender: 'M',
         hobby: 'shopping',
-        avatar: 'avatar6.png',
+        avatar: 'image3.jpg',
         age: 47
     },
     {
         name: 'Charlie',
         gender: 'M',
         hobby: 'pets',
-        avatar: 'avatar7.png',
+        avatar: 'image3.jpg',
         age: 19
     },
 ];
 
 window.addEventListener('load', function() {
     
-    var results = document.getElementById('results');
     
     function search() {
-        
+        const results = document.getElementById('results');
         //get hobby
         var hobbyField = document.getElementById('hobby');
         var hobby = hobbyField.value;
@@ -67,33 +66,46 @@ window.addEventListener('load', function() {
         var s = genderField.selectedIndex;
         var gender = genderField.options[s].value;
         
-        var resultsHtml = '';
+        
         var usersLength = users.length;
 
         for(var i = 0; i < usersLength; i++) {
+            var resultsHtml = '';
+            var div = document.createElement('div')
+            div.classList.add('service');
+            div.classList.add('mar-right40')
             //check gender
             if (gender == 'A' || gender == users[i].gender) {
                 //check hobby
                 if (hobby == '' || hobby == users[i].hobby) {
                     // Check if not less than minimum age
                     if(minAge == '' || minAge <= users[i].age){
+                        console.log(minAge);
                         if(maxAge == '' || maxAge >= users[i].age){
-                            resultsHtml += '<div class="person-row">\
-                            <img src="images/' + users[i].avatar + '" />\
-                            <div class="person-info">\
-                            <div>' + users[i].name + '</div>\
-                            <div>' + users[i].hobby + '</div>\
-                            <div>' + users[i].age + '</div></div>\
-                            <button>Add as friend</button></div>'; 
+                            resultsHtml += `
+                            <div class="service mar-right40"> <img src="images/${users[i].avatar}" />
+                            <div class="shadows"></div>
+                            <div class="title">
+                              <h2>${users[i].name}</h2>
+                            </div>
+                            <div class="content">
+                              <p>${users[i].hobby}</p>
+                              <p>${users[i].age}</p>
+                              <div class="button"><a href="#">More Info </a></div>
+                            </div>
+                          </div>
+                            `; 
                         }
                     } 
                 }
             }
+            div.innerHTML = resultsHtml;
+                
+            results.insertAdjacentElement('beforeend', div);
         }
 
-        console.log(resultsHtml)
-        
-        results.innerHTML = resultsHtml;
+
+
     }
     
     var searchBtn = document.getElementById('searchBtn');
