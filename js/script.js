@@ -68,10 +68,12 @@ window.addEventListener('load', function() {
         
         
         var usersLength = users.length;
-
+        var resultDiv = document.createElement('div')
+        resultDiv.id = 'results';
         for(var i = 0; i < usersLength; i++) {
             var resultsHtml = '';
             var div = document.createElement('div')
+
             div.classList.add('service');
             div.classList.add('mar-right40')
             //check gender
@@ -101,10 +103,10 @@ window.addEventListener('load', function() {
             }
             div.innerHTML = resultsHtml;
                 
-            results.insertAdjacentElement('beforeend', div);
+            resultDiv.append(div);
         }
 
-
+        results.replaceWith(resultDiv);
 
     }
     
